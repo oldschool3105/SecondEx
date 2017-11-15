@@ -1,8 +1,8 @@
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class Login {
 
@@ -91,6 +92,43 @@ public class Login {
     @After
     public void quitDriver() {
 //        driver.quit(); // закрытия браузера
+    }
+
+
+    @Test
+    public void PassRegistration () {
+        driver.get("https://accounts.google.com/SignUp"); //переходим по ссылке
+
+        WebElement firstName = driver.findElement(By.id("FirstName"));
+        firstName.sendKeys("Misha");
+
+        WebElement lastName = driver.findElement(By.id("LastName"));
+        lastName.sendKeys("Bidnyj");
+
+        WebElement gmailAdress = driver.findElement(By.id("GmailAddress"));
+        gmailAdress.sendKeys("testaccountmisha001@gmail.com");
+
+        WebElement password = driver.findElement(By.id("Passwd"));
+        password.sendKeys("misha1234");
+
+        WebElement passRep = driver.findElement(By.id("PasswdAgain"));
+        passRep.sendKeys("misha1234");
+
+        WebElement mounth = driver.findElement(By.xpath("//*[@id=\"BirthMonth\"]/div[1]"));
+        mounth.click();
+        mounth.sendKeys(Keys.ARROW_DOWN);
+        mounth.sendKeys(Keys.ENTER);
+
+        WebElement dayBith = driver.findElement(By.id("BirthDay"));
+        dayBith.sendKeys("9");
+
+        WebElement yearBith = driver.findElement(By.id("BirthYear"));
+        yearBith.sendKeys("1995");
+
+        WebElement gender = driver.findElement(By.xpath("//*[@id=\"Gender\"]/div[1]"));
+        gender.click();
+        gender.sendKeys(Keys.ARROW_DOWN);
+        gender.sendKeys(Keys.ENTER);
     }
 
 }
