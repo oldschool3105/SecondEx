@@ -6,12 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Login {
 
@@ -79,7 +82,7 @@ public class Login {
 
     @AfterClass
     public static void createAndStopService() {
-        // service.stop(); //остановка сервиса
+       //  service.stop(); //остановка сервиса
     }
 
     @Before
@@ -91,44 +94,82 @@ public class Login {
 
     @After
     public void quitDriver() {
-//        driver.quit(); // закрытия браузера
+//       driver.quit(); // закрытия браузера
     }
 
 
+//    @Test
+//    public void PassRegistration()  {
+//        driver.get("https://accounts.google.com/SignUp"); //переходим по ссылке
+//
+//        WebElement firstName = driver.findElement(By.id("FirstName"));
+//        firstName.sendKeys("Misha");
+//
+//        WebElement lastName = driver.findElement(By.id("LastName"));
+//        lastName.sendKeys("Bidnyj");
+//
+//        WebElement gmailAdress = driver.findElement(By.id("GmailAddress"));
+//        gmailAdress.sendKeys("sdhfljsdlfksjdhfk");
+//
+//        WebElement password = driver.findElement(By.id("Passwd"));
+//        password.sendKeys("misha1234");
+//
+//        WebElement passRep = driver.findElement(By.id("PasswdAgain"));
+//        passRep.sendKeys("misha1234");
+//
+//        WebElement mounth = driver.findElement(By.xpath("//*[@id=\"BirthMonth\"]/div[1]"));
+//        mounth.click();
+//        mounth.sendKeys(Keys.ARROW_DOWN);
+//        mounth.sendKeys(Keys.ENTER);
+//
+//        WebElement dayBith = driver.findElement(By.id("BirthDay"));
+//        dayBith.sendKeys("9");
+//
+//        WebElement yearBith = driver.findElement(By.id("BirthYear"));
+//        yearBith.sendKeys("1995");
+//
+//        WebElement gender = driver.findElement(By.xpath("//*[@id=\"Gender\"]/div[1]"));
+//        gender.click();
+//        gender.sendKeys(Keys.ARROW_DOWN);
+//        gender.sendKeys(Keys.ENTER);
+//
+//        WebElement phoneNumber = driver.findElement(By.id("RecoveryPhoneNumber"));
+//        phoneNumber.sendKeys("991812099");
+//
+//        WebElement buttonNext = driver.findElement(By.id("submitbutton"));
+//        buttonNext.click();
+//        driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+//
+//        WebElement termOfUse = driver.findElement(By.id("tos-scroll"));
+//
+//    }
+    // попытка создать слишком короткий эмейл That username is taken. Try another.
     @Test
-    public void PassRegistration () {
+    public void IncorrectLengtsEmail() {
         driver.get("https://accounts.google.com/SignUp"); //переходим по ссылке
 
-        WebElement firstName = driver.findElement(By.id("FirstName"));
-        firstName.sendKeys("Misha");
-
-        WebElement lastName = driver.findElement(By.id("LastName"));
-        lastName.sendKeys("Bidnyj");
-
         WebElement gmailAdress = driver.findElement(By.id("GmailAddress"));
-        gmailAdress.sendKeys("testaccountmisha001@gmail.com");
-
+        gmailAdress.sendKeys("test");
         WebElement password = driver.findElement(By.id("Passwd"));
-        password.sendKeys("misha1234");
+        password.click();
 
-        WebElement passRep = driver.findElement(By.id("PasswdAgain"));
-        passRep.sendKeys("misha1234");
 
-        WebElement mounth = driver.findElement(By.xpath("//*[@id=\"BirthMonth\"]/div[1]"));
-        mounth.click();
-        mounth.sendKeys(Keys.ARROW_DOWN);
-        mounth.sendKeys(Keys.ENTER);
+        //driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
 
-        WebElement dayBith = driver.findElement(By.id("BirthDay"));
-        dayBith.sendKeys("9");
-
-        WebElement yearBith = driver.findElement(By.id("BirthYear"));
-        yearBith.sendKeys("1995");
-
-        WebElement gender = driver.findElement(By.xpath("//*[@id=\"Gender\"]/div[1]"));
-        gender.click();
-        gender.sendKeys(Keys.ARROW_DOWN);
-        gender.sendKeys(Keys.ENTER);
+        WebElement errorText = driver.findElement(By.xpath("//*[@id=\"errormsg_0_GmailAddress\"]"));
+        System.out.println(errorText.isEnabled());
     }
 
+    //попытка зарегестрировать уже существующий адрес
+//    @Test
+//    public void AddedEmail() {
+//        driver.get("https://accounts.google.com/SignUp"); //переходим по ссылке
+//
+//        WebElement gmailAdress = driver.findElement(By.id("GmailAddress"));
+//        gmailAdress.sendKeys("testaccount");
+//        gmailAdress.sendKeys(Keys.ENTER);
+//        driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+//        WebElement errorText = driver.findElement(By.linkText("That username is taken. Try another."));
+//        System.out.println(errorText);
+//    }
 }
