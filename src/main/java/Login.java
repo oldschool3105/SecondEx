@@ -149,15 +149,19 @@ public class Login {
         driver.get("https://accounts.google.com/SignUp"); //переходим по ссылке
 
         WebElement gmailAdress = driver.findElement(By.id("GmailAddress"));
-        gmailAdress.sendKeys("test");
+        gmailAdress.sendKeys("wev");
         WebElement password = driver.findElement(By.id("Passwd"));
         password.click();
 
 
-        //driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+        driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
 
-        WebElement errorText = driver.findElement(By.xpath("//*[@id=\"errormsg_0_GmailAddress\"]"));
-        System.out.println(errorText.isEnabled());
+//        WebElement errorText = driver.findElement(By.className("      form-error"));
+//        errorText.getText();
+
+        WebElement errorText = driver.findElement((By.xpath("//*[text()='Please use between 6 and 30 characters.']")));
+        errorText.getText();
+
     }
 
     //попытка зарегестрировать уже существующий адрес
