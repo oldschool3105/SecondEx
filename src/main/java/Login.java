@@ -158,9 +158,11 @@ public class Login {
 
 //        WebElement errorText = driver.findElement(By.className("      form-error"));
 //        errorText.getText();
-
-        WebElement errorText = driver.findElement((By.xpath("//*[text()='Please use between 6 and 30 characters.']")));
+        // //*[@id="errormsg_0_GmailAddress"]
+        // //*[text()='Please use between 6 and 30 characters.']
+        WebElement errorText = driver.findElement((By.xpath("//*[@id=\"errormsg_0_GmailAddress\"]")));
         errorText.getText();
+        System.out.println(errorText.getText());
 
     }
 
